@@ -22,11 +22,7 @@ namespace Lab1.Models.Entities
         [Required(ErrorMessage = "Поле Адрес должно быть установлено")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Длина строки должна быть от 3 до 50 символов")]
         [DisplayName("Адрес")]
-        public string Address { get; set; }
-
-
-        [DisplayName("Фото")]
-        public byte[] Photo { get; set; }             
+        public string Address { get; set; }             
 
 
 

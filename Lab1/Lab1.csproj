@@ -159,6 +159,10 @@
     <Compile Include="Migrations\202106061438015_MigrateDB31.Designer.cs">
       <DependentUpon>202106061438015_MigrateDB31.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106061718187_MigrateDB4.cs" />
+    <Compile Include="Migrations\202106061718187_MigrateDB4.Designer.cs">
+      <DependentUpon>202106061718187_MigrateDB4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\Category.cs" />
     <Compile Include="Models\Entities\Client.cs" />
@@ -287,6 +291,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106061438015_MigrateDB31.resx">
       <DependentUpon>202106061438015_MigrateDB31.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106061718187_MigrateDB4.resx">
+      <DependentUpon>202106061718187_MigrateDB4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

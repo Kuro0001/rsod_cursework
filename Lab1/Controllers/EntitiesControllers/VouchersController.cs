@@ -34,6 +34,9 @@ namespace Lab1.Controllers.EntitiesControllers
             {
                 return HttpNotFound();
             }
+            voucher.Tour = db.Tours.Find(voucher.TourId);
+            voucher.Client = db.Clients.Find(voucher.ClientId);
+            voucher.Employee = db.Employees.Find(voucher.EmployeeId);
             return View(voucher);
         }
 
@@ -115,6 +118,9 @@ namespace Lab1.Controllers.EntitiesControllers
             {
                 return HttpNotFound();
             }
+            voucher.Tour = db.Tours.Find(voucher.TourId);
+            voucher.Client = db.Clients.Find(voucher.ClientId);
+            voucher.Employee = db.Employees.Find(voucher.EmployeeId);
             return View(voucher);
         }
 

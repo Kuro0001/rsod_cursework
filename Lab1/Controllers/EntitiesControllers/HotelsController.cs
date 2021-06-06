@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Lab1.Models;
 using Lab1.Models.Entities;
+using System.IO;
 
 namespace Lab1.Controllers.EntitiesControllers
 {
@@ -50,7 +51,7 @@ namespace Lab1.Controllers.EntitiesControllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Address,Photo,DirectionId")] Hotel hotel)
+        public ActionResult Create([Bind(Include = "ID,Name,Address,DirectionId")] Hotel hotel)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +63,7 @@ namespace Lab1.Controllers.EntitiesControllers
             ViewBag.DirectionId = new SelectList(db.Directions, "ID", "Name", hotel.DirectionId);
             return View(hotel);
         }
+
 
         // GET: Hotels/Edit/5
         public ActionResult Edit(int? id)
@@ -84,7 +86,7 @@ namespace Lab1.Controllers.EntitiesControllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Address,Photo,DirectionId")] Hotel hotel)
+        public ActionResult Edit([Bind(Include = "ID,Name,Address,DirectionId")] Hotel hotel)
         {
             if (ModelState.IsValid)
             {

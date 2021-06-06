@@ -34,6 +34,10 @@ namespace Lab1.Controllers.EntitiesControllers
             {
                 return HttpNotFound();
             }
+            tour.Hotel = db.Hotels.Find(tour.HotelId);
+            tour.Category = db.Categorys.Find(tour.CategoryId);
+            tour.Kind = db.Kinds.Find(tour.KindId);
+            tour.TourOperator = db.TourOperators.Find(tour.TourOperatorId);
             return View(tour);
         }
 
@@ -119,6 +123,10 @@ namespace Lab1.Controllers.EntitiesControllers
             {
                 return HttpNotFound();
             }
+            tour.Hotel = db.Hotels.Find(tour.HotelId);
+            tour.Category = db.Categorys.Find(tour.CategoryId);
+            tour.Kind = db.Kinds.Find(tour.KindId);
+            tour.TourOperator = db.TourOperators.Find(tour.TourOperatorId);
             return View(tour);
         }
 
