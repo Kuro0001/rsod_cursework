@@ -57,15 +57,10 @@ namespace Lab1.Models.Entities
 
 
         // ==== поля-ключи внешние ====
-        [Display(Name = "Путевка")]
-        public int VoucherAsTouristId { get; set; }
-        public Voucher VoucherAsTourist { get; set; }
-
-
-        public ICollection<Voucher> VoucherAsCustomer { get; set; }
+        public ICollection<Voucher> Vouchers { get; set; }
         public Client()
         {
-            VoucherAsCustomer = new List<Voucher>();
+            Vouchers = new List<Voucher>();
         }
     }
 }

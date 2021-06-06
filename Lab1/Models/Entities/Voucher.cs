@@ -15,7 +15,7 @@ namespace Lab1.Models.Entities
 
         [Required]
         [StringLength(45)]
-        [DisplayName("Наименование")]
+        [DisplayName("Наименование путевки")]
         public string Name { get; set; }
 
         [Required]
@@ -42,19 +42,8 @@ namespace Lab1.Models.Entities
         public int TourId { get; set; }
         public Tour Tour { get; set; }
 
-        [Display(Name = "Заказчик")]
-        public int CustomerId { get; set; }
-        public Client Customer { get; set; }
-
-
-
-
-
-        // список туристов по путевке
-        public ICollection<Client> Tourists { get; set; }
-        public Voucher()
-        {
-            Tourists = new List<Client>();
-        }
+        [Display(Name = "Клиент/Покупатель")]
+        public int ClientId { get; set; }
+        public Client Client { get; set; }
     }
 }

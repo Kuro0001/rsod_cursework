@@ -14,7 +14,7 @@ namespace Lab1.Models.Entities
 
         [Required]
         [StringLength(45)]
-        [DisplayName("Наименование")]
+        [DisplayName("Наименование категории")]
         public string Name { get; set; }
 
         [Required]

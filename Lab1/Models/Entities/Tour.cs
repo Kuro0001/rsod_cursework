@@ -15,16 +15,12 @@ namespace Lab1.Models.Entities
 
         [Required]
         [StringLength(45)]
-        [DisplayName("Наименование")]
+        [DisplayName("Наименование тура")]
         public string Name { get; set; }
 
         [Required]
         [DisplayName("Кол-во предложений")]
         public int OffersAll { get; set; }
-
-        [Required]
-        [DisplayName("Кол-во оформленных путевок")]
-        public int DoneOffersCount { get; set; }
 
         [Required]
         [DisplayName("Цена за день на человека")]
