@@ -47,7 +47,7 @@ namespace Lab1.Controllers.EntitiesControllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Surname,Patronymic,Email")] Employee employee)
+        public ActionResult Create([Bind(Include = "ID,Name,Surname,Patronymic,Email,Login,Password")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace Lab1.Controllers.EntitiesControllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Surname,Patronymic,Email")] Employee employee)
+        public ActionResult Edit([Bind(Include = "ID,Name,Surname,Patronymic,Email,Login,Password")] Employee employee)
         {
             if (ModelState.IsValid)
             {

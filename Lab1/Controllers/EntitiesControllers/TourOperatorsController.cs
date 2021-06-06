@@ -47,7 +47,7 @@ namespace Lab1.Controllers.EntitiesControllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Phone,UniqCompanyNumber,Email")] TourOperator tourOperator)
+        public ActionResult Create([Bind(Include = "ID,Name,Phone,UniqCompanyNumber,Email,Login,Password")] TourOperator tourOperator)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace Lab1.Controllers.EntitiesControllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Phone,UniqCompanyNumber,Email")] TourOperator tourOperator)
+        public ActionResult Edit([Bind(Include = "ID,Name,Phone,UniqCompanyNumber,Email,Login,Password")] TourOperator tourOperator)
         {
             if (ModelState.IsValid)
             {

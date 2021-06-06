@@ -34,6 +34,7 @@ namespace Lab1.Controllers.EntitiesControllers
             {
                 return HttpNotFound();
             }
+            hotel.Direction = db.Directions.Find(hotel.DirectionId);
             return View(hotel);
         }
 
@@ -107,6 +108,7 @@ namespace Lab1.Controllers.EntitiesControllers
             {
                 return HttpNotFound();
             }
+            hotel.Direction = db.Directions.Find(hotel.DirectionId);
             return View(hotel);
         }
 

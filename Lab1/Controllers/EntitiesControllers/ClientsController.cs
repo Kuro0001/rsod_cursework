@@ -47,7 +47,7 @@ namespace Lab1.Controllers.EntitiesControllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Pasport,Name,Surname,Patronymic,BirthDate,Phone,Email")] Client client)
+        public ActionResult Create([Bind(Include = "ID,Pasport,Name,Surname,Patronymic,BirthDate,Sex,Phone,Email,Login,Password")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace Lab1.Controllers.EntitiesControllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Pasport,Name,Surname,Patronymic,BirthDate,Phone,Email")] Client client)
+        public ActionResult Edit([Bind(Include = "ID,Pasport,Name,Surname,Patronymic,BirthDate,Sex,Phone,Email,Login,Password")] Client client)
         {
             if (ModelState.IsValid)
             {

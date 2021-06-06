@@ -139,6 +139,27 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106060904567_InitialCreate.cs" />
+    <Compile Include="Migrations\202106060904567_InitialCreate.Designer.cs">
+      <DependentUpon>202106060904567_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106061018466_MigrateDB.cs" />
+    <Compile Include="Migrations\202106061018466_MigrateDB.Designer.cs">
+      <DependentUpon>202106061018466_MigrateDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106061019387_MigrateDB2.cs" />
+    <Compile Include="Migrations\202106061019387_MigrateDB2.Designer.cs">
+      <DependentUpon>202106061019387_MigrateDB2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106061225438_MigrateDB3.cs" />
+    <Compile Include="Migrations\202106061225438_MigrateDB3.Designer.cs">
+      <DependentUpon>202106061225438_MigrateDB3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106061438015_MigrateDB31.cs" />
+    <Compile Include="Migrations\202106061438015_MigrateDB31.Designer.cs">
+      <DependentUpon>202106061438015_MigrateDB31.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\Category.cs" />
     <Compile Include="Models\Entities\Client.cs" />
     <Compile Include="Models\TouristAgencyDbEntities.cs" />
@@ -149,6 +170,7 @@
     <Compile Include="Models\Entities\Tour.cs" />
     <Compile Include="Models\Entities\TourOperator.cs" />
     <Compile Include="Models\Entities\Voucher.cs" />
+    <Compile Include="Models\VoucherFull.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -188,16 +210,16 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Kinds\Create.cshtml" />
-    <Content Include="Views\Kinds\Delete.cshtml" />
-    <Content Include="Views\Kinds\Details.cshtml" />
-    <Content Include="Views\Kinds\Edit.cshtml" />
-    <Content Include="Views\Kinds\Index.cshtml" />
     <Content Include="Views\Categories\Create.cshtml" />
     <Content Include="Views\Categories\Delete.cshtml" />
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Kinds\Create.cshtml" />
+    <Content Include="Views\Kinds\Delete.cshtml" />
+    <Content Include="Views\Kinds\Details.cshtml" />
+    <Content Include="Views\Kinds\Edit.cshtml" />
+    <Content Include="Views\Kinds\Index.cshtml" />
     <Content Include="Views\Directions\Create.cshtml" />
     <Content Include="Views\Directions\Delete.cshtml" />
     <Content Include="Views\Directions\Details.cshtml" />
@@ -213,26 +235,26 @@
     <Content Include="Views\TourOperators\Details.cshtml" />
     <Content Include="Views\TourOperators\Edit.cshtml" />
     <Content Include="Views\TourOperators\Index.cshtml" />
-    <Content Include="Views\Tours\Create.cshtml" />
-    <Content Include="Views\Tours\Delete.cshtml" />
-    <Content Include="Views\Tours\Details.cshtml" />
-    <Content Include="Views\Tours\Edit.cshtml" />
-    <Content Include="Views\Tours\Index.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
     <Content Include="Views\Employees\Delete.cshtml" />
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
-    <Content Include="Views\Clients\Create.cshtml" />
-    <Content Include="Views\Clients\Delete.cshtml" />
-    <Content Include="Views\Clients\Details.cshtml" />
-    <Content Include="Views\Clients\Edit.cshtml" />
-    <Content Include="Views\Clients\Index.cshtml" />
+    <Content Include="Views\Tours\Create.cshtml" />
+    <Content Include="Views\Tours\Delete.cshtml" />
+    <Content Include="Views\Tours\Details.cshtml" />
+    <Content Include="Views\Tours\Edit.cshtml" />
+    <Content Include="Views\Tours\Index.cshtml" />
     <Content Include="Views\Vouchers\Create.cshtml" />
     <Content Include="Views\Vouchers\Delete.cshtml" />
     <Content Include="Views\Vouchers\Details.cshtml" />
     <Content Include="Views\Vouchers\Edit.cshtml" />
     <Content Include="Views\Vouchers\Index.cshtml" />
+    <Content Include="Views\Clients\Create.cshtml" />
+    <Content Include="Views\Clients\Delete.cshtml" />
+    <Content Include="Views\Clients\Details.cshtml" />
+    <Content Include="Views\Clients\Edit.cshtml" />
+    <Content Include="Views\Clients\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -249,6 +271,23 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202106060904567_InitialCreate.resx">
+      <DependentUpon>202106060904567_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106061018466_MigrateDB.resx">
+      <DependentUpon>202106061018466_MigrateDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106061019387_MigrateDB2.resx">
+      <DependentUpon>202106061019387_MigrateDB2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106061225438_MigrateDB3.resx">
+      <DependentUpon>202106061225438_MigrateDB3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106061438015_MigrateDB31.resx">
+      <DependentUpon>202106061438015_MigrateDB31.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
