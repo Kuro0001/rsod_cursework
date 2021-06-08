@@ -4,6 +4,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
+using System.Data.Entity;
+using Lab1.Models.Security;
 
 [assembly: OwinStartup(typeof(Lab1.App_Start.Startup))]
 

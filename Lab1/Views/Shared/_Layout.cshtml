@@ -23,16 +23,17 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Туры", "Index", "Tours")</li>
                     <li>@Html.ActionLink("Информация", "About", "Home")</li>
-                    <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>                    
+                    <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>
                     @if (!User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Войти", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Зарегестрироваться", "Register", "Account")</li>
                     }
                     else
                     {
                         if (User.IsInRole("Employee"))
                         {
-                        <li>@Html.ActionLink("Администрирование", "Index", "Administration")</li>
+                            <li>@Html.ActionLink("Администрирование", "Index", "Administration")</li>
                         }
                         <li>@Html.ActionLink("Личный кабинет", "Index", "Account")</li>
                         <li>@Html.ActionLink("Выйти", "Logout", "Account")</li>

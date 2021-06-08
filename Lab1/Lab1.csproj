@@ -332,7 +332,10 @@
     <Compile Include="Models\Security\ChangePassword.cs" />
     <Compile Include="Models\Security\Login.cs" />
     <Compile Include="Models\Security\MyIdentityDbContext.cs" />
+    <Compile Include="Models\Security\MyIdentityRole.cs" />
+    <Compile Include="Models\Security\MyIdentityUser.cs" />
     <Compile Include="Models\Security\Register.cs" />
+    <Compile Include="Models\Security\_reserv_Identity_context.cs" />
     <Compile Include="Models\TouristAgencyDbEntities.cs" />
     <Compile Include="Models\Entities\Direction.cs" />
     <Compile Include="Models\Entities\Employee.cs" />
