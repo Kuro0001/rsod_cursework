@@ -37,8 +37,9 @@ namespace Lab1.Controllers.EntitiesControllers
         }
 
         // GET: Clients/Create
-        public ActionResult Create()
+        public ActionResult Create(string email)
         {
+            ViewBag.email = email;
             return View();
         }
 
