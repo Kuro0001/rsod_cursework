@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Lab1.Models.Entities.Direction>
+
+@{
+    ViewBag.Title = "SelectDirection";
+}
+
+<h2>SelectDirection</h2>
+
+@Html.RouteLink("Back to list", new { controller = "Hotels", action = "Index" })
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.RouteLink("Select", new { controller = "Hotels", action = "Create", id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

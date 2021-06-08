@@ -22,6 +22,13 @@ namespace Lab1.Controllers.EntitiesControllers
             return View(tours.ToList());
         }
 
+        // GET: Tours
+        public ActionResult SelectTourToCreateVoucher()
+        {
+            var tours = db.Tours.Include(t => t.Category).Include(t => t.Hotel).Include(t => t.Kind).Include(t => t.TourOperator);
+            return View(tours.ToList());
+        }
+
         // GET: Tours/Details/5
         public ActionResult Details(int? id)
         {
@@ -42,10 +49,14 @@ namespace Lab1.Controllers.EntitiesControllers
         }
 
         // GET: Tours/Create
-        public ActionResult Create()
+        public ActionResult Create(int idHotel)
         {
+            Hotel Hotel = db.Hotels.Find(idHotel);
+            Hotel.Direction = db.Directions.Find(Hotel.DirectionId);
+            ViewData["HotelName"] = Hotel.Name + ", " + Hotel.Direction.Name;
+            ViewData["HotelId"] = Hotel.ID;
+
             ViewBag.CategoryId = new SelectList(db.Categorys, "ID", "Name");
-            ViewBag.HotelId = new SelectList(db.Hotels, "ID", "Name");
             ViewBag.KindId = new SelectList(db.Kinds, "ID", "Name");
             ViewBag.TourOperatorId = new SelectList(db.TourOperators, "ID", "Name");
             return View();
@@ -84,10 +95,10 @@ namespace Lab1.Controllers.EntitiesControllers
             {
                 return HttpNotFound();
             }
+            tour.Hotel = db.Hotels.Find(tour.HotelId);
+            tour.TourOperator = db.TourOperators.Find(tour.TourOperatorId);
             ViewBag.CategoryId = new SelectList(db.Categorys, "ID", "Name", tour.CategoryId);
-            ViewBag.HotelId = new SelectList(db.Hotels, "ID", "Name", tour.HotelId);
             ViewBag.KindId = new SelectList(db.Kinds, "ID", "Name", tour.KindId);
-            ViewBag.TourOperatorId = new SelectList(db.TourOperators, "ID", "Name", tour.TourOperatorId);
             return View(tour);
         }
 

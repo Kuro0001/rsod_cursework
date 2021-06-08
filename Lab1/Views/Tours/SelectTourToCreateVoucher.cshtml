@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Lab1.Models.Entities.Tour>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "SelectTourToCreateVoucher";
 }
 
-<h2>Index</h2>
+<h2>SelectTourToCreateVoucher</h2>
 
 <p>
-    @Html.RouteLink("Creat new", new { controller = "Directions", action = "SelectDirectionToSelectHotel" })
+    @Html.RouteLink("Back to Bouchers", new { controller = "Vouchers", action = "Index" })
 </p>
 <table class="table">
     <tr>
@@ -71,10 +71,7 @@
             @Html.DisplayFor(modelItem => item.DayCount)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID }) |
-            @Html.RouteLink("Creat new Voucher", new { controller = "Vouchers", action = "Create", idTour = item.ID })
+            @Html.RouteLink("Select", new { controller = "Vouchers", action = "Create", idTour = item.ID })
         </td>
     </tr>
 }

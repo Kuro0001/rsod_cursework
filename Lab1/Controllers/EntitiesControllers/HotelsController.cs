@@ -23,6 +23,14 @@ namespace Lab1.Controllers.EntitiesControllers
             return View(hotels.ToList());
         }
 
+        // GET: Hotels
+        public ActionResult SelectHotelToCreatTour(int IdDirection)
+        {
+            var hotels = db.Hotels.Include(h => h.Direction).Where(h => h.DirectionId == IdDirection);
+            return View(hotels.ToList());
+        }
+
+
         // GET: Hotels/Details/5
         public ActionResult Details(int? id)
         {
@@ -40,15 +48,19 @@ namespace Lab1.Controllers.EntitiesControllers
         }
 
         // GET: Hotels/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            ViewBag.DirectionId = new SelectList(db.Directions, "ID", "Name");
+            setDirection(id);
             return View();
         }
 
+        public void setDirection(int id)
+        {
+            ViewData["Name"] = db.Directions.Find(id).Name;
+            ViewData["Id"] = db.Directions.Find(id).ID;
+            ViewBag.Direction = db.Directions.Find(id);
+        }
         // POST: Hotels/Create
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Address,DirectionId")] Hotel hotel)
@@ -65,6 +77,10 @@ namespace Lab1.Controllers.EntitiesControllers
         }
 
 
+        
+
+
+
         // GET: Hotels/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -77,7 +93,7 @@ namespace Lab1.Controllers.EntitiesControllers
             {
                 return HttpNotFound();
             }
-            ViewBag.DirectionId = new SelectList(db.Directions, "ID", "Name", hotel.DirectionId);
+            hotel.Direction = db.Directions.Find(hotel.DirectionId);
             return View(hotel);
         }
 

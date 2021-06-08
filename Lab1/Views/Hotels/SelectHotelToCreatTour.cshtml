@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Lab1.Models.Entities.Hotel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "SelectHotelToCreatTour";
 }
 
-<h2>Index</h2>
+<h2>SelectHotelToCreatTour</h2>
 
 <p>
-    @Html.ActionLink("Create New", "SelectDirectionToCreatHotel", "Directions")
+    @Html.RouteLink("Back to Direction", new { controller = "Directions", action = "SelectDirectionToSelectHotel" })
 </p>
 <table class="table">
     <tr>
@@ -35,9 +35,7 @@
             @Html.DisplayFor(modelItem => item.Address)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.RouteLink("Select", new { controller = "Tours", action = "Create", idHotel = item.ID })
         </td>
     </tr>
 }

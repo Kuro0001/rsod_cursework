@@ -20,7 +20,18 @@ namespace Lab1.Controllers.EntitiesControllers
         {
             return View(db.Directions.ToList());
         }
+        
+        // Get: directions / to select into Hotels to creat
+        public ActionResult SelectDirectionToCreatHotel()
+        {
+            return View(db.Directions.ToList());
+        }
 
+        // Get: directions / to select into Hotels to creat
+        public ActionResult SelectDirectionToSelectHotel()
+        {
+            return View(db.Directions.ToList());
+        }
         // GET: Directions/Details/5
         public ActionResult Details(int? id)
         {

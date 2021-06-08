@@ -41,11 +41,17 @@ namespace Lab1.Controllers.EntitiesControllers
         }
 
         // GET: Vouchers/Create
-        public ActionResult Create()
+        public ActionResult Create(int idTour)
         {
+            Tour Tour = db.Tours.Find(idTour);
+            Tour.Hotel = db.Hotels.Find(Tour.HotelId);
+            Tour.Hotel.Direction = db.Directions.Find(Tour.Hotel.DirectionId);
+            Tour.Category = db.Categorys.Find(Tour.CategoryId);
+            ViewData["TourName"] = Tour.Name + ", " + Tour.Hotel.Direction.Name;
+            ViewData["TourId"] = Tour.ID;
+            ViewData["Price"] = (Tour.Price*Tour.DayCount)*Tour.Category.Discount + Tour.Category.AddedValue;
             ViewBag.ClientId = new SelectList(db.Clients, "ID", "Pasport");
             ViewBag.EmployeeId = new SelectList(db.Employees, "ID", "Name");
-            ViewBag.TourId = new SelectList(db.Tours, "ID", "Name");
             return View();
         }
 
@@ -81,9 +87,10 @@ namespace Lab1.Controllers.EntitiesControllers
             {
                 return HttpNotFound();
             }
+            voucher.Tour = db.Tours.Find(voucher.TourId);
+            voucher.Employee = db.Employees.Find(voucher.EmployeeId);
+
             ViewBag.ClientId = new SelectList(db.Clients, "ID", "Pasport", voucher.ClientId);
-            ViewBag.EmployeeId = new SelectList(db.Employees, "ID", "Name", voucher.EmployeeId);
-            ViewBag.TourId = new SelectList(db.Tours, "ID", "Name", voucher.TourId);
             return View(voucher);
         }
 
