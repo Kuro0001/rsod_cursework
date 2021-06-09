@@ -79,7 +79,8 @@
         <td>
             @Html.ActionLink("Редактировать", "Edit", new { id = item.ID }) |
             @Html.RouteLink("Подробности", new { controller = "DetailClient", action = "ClientDetail", id = item.ID }) |
-            @Html.ActionLink("Удалить", "Delete", new { id = item.ID })
+            @Html.ActionLink("Удалить", "Delete", new { id = item.ID }) |
+            @Html.ActionLink("Отправить письмо", "MailSend", new { id = item.ID })
         </td>
     </tr>
 }

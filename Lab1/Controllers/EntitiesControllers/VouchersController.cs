@@ -57,7 +57,7 @@ namespace Lab1.Controllers.EntitiesControllers
 
             Employee Employee = db.Employees.Find(idEmployee);
             ViewData["EmployeeName"] = Employee.Surname + " " + Employee.Name;
-            ViewData["EmployeeId"] = Client.ID;
+            ViewData["EmployeeId"] = Employee.ID;
 
             return View();
         }

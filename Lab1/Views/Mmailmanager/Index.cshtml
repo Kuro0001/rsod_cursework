@@ -1,0 +1,104 @@
+﻿@model Lab1.Models.MmailManager
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Отправить письмо</h2>
+
+
+
+@using (Html.BeginForm())
+{
+    <div>
+        <h4>Клиент</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.Pasport)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.Pasport)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.Surname)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.Surname)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.Patronymic)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.Patronymic)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.BirthDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.BirthDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.Sex)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.Sex)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.Phone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.Phone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.Login)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.Login)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.Password)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.Password)
+            </dd>
+
+        </dl>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Отправить" class="btn btn-default" />
+        </div>
+    </div>
+}
