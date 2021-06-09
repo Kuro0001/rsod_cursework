@@ -62,9 +62,9 @@ namespace Lab1.Controllers.DetailControllers
                 {
                     worksheet.Cells[startLine, 1].Value = item.ID;
                     worksheet.Cells[startLine, 2].Value = item.Employee.Surname + " " + item.Employee.Name;
-                    worksheet.Cells[startLine, 3].Value = item.Date;
+                    worksheet.Cells[startLine, 3].Value = item.Date.ToString();
                     worksheet.Cells[startLine, 4].Value = item.Price;
-                    worksheet.Cells[startLine, 5].Value = item.Tour.StartDate;
+                    worksheet.Cells[startLine, 5].Value = item.Tour.StartDate.ToString();
                     worksheet.Cells[startLine, 6].Value = item.Tour.DayCount;
                     worksheet.Cells[startLine, 7].Value = item.Tour.Name;
                     worksheet.Cells[startLine, 8].Value = item.Tour.Hotel.Direction.Name;
