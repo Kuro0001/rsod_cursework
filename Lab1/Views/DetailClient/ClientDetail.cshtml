@@ -4,7 +4,8 @@
 }
 
 <h2>Информация о клиенте</h2>
-@Html.RouteLink("Сделать эксел-документ", new { controller = "EXEL", action = "GetExelClientInfo", ClietnId = ViewData["id"] })
+@Html.RouteLink("Сделать excel-документ", new { controller = "EXEL", action = "GetExelClientInfo", ClietnId = ViewData["id"] }) |
+@Html.RouteLink("Сделать pdf-документ", new { controller = "PDF", action = "GetPDFClientInfo", ClientId = ViewData["id"] })
 <div>
     <h4>Клиент</h4>
     <hr />
