@@ -1,0 +1,31 @@
+﻿@model Lab1.Models.ToSelectTour
+@{
+    ViewBag.Title = "SelectDirection";
+}
+
+<h2>Выбрать направление для тура</h2>
+
+<p>
+    @Html.RouteLink("Назад к списку", new { controller = "Tour", action = "Index" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Direction.First().Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Direction)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.Name)
+            </td>
+            <td>
+                @Html.RouteLink("Выбрать", new { controller = "ToSelectForTour", action = "SelectHotel", idDirection = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

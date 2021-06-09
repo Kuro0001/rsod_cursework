@@ -1,0 +1,61 @@
+﻿@model Lab1.Models.ToSelectVoucher
+@{
+    ViewBag.Title = "SelectEmployee";
+}
+
+<h2>Выбрать сотрудника компании</h2>
+@Html.Hidden("TourId", ViewData["TourId"])
+<p>
+    @Html.RouteLink("Назад к выбору тура", new { controller = "ToSelectVoucher", action = "SelectEmployee" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.First().Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.First().Patronymic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.First().Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.First().Login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.First().Password)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Employee)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patronymic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.RouteLink("Выбрать", new { controller = "ToSelectVoucher", action = "SelectClient", idTour = ViewData["TourId"], idEmployee = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

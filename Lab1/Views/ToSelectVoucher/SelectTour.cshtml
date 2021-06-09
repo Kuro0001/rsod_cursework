@@ -1,0 +1,78 @@
+﻿@model Lab1.Models.ToSelectVoucher
+@{
+    ViewBag.Title = "SelectTour";
+}
+
+<h2>Выберите тур</h2>
+<p>
+    @Html.RouteLink("К списку путевок", new { controller = "Voucher", action = "Index" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Tour.First().Category.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tour.First().Hotel.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tour.First().Kind.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tour.First().TourOperator.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tour.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tour.First().OffersAll)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tour.First().Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tour.First().StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tour.First().DayCount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Tour)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hotel.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kind.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TourOperator.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OffersAll)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DayCount)
+            </td>
+            <td>
+                @Html.RouteLink("Выбрать", new { controller = "ToSelectVoucher", action = "SelectEmployee", idTour = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

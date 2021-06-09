@@ -4,10 +4,10 @@
     ViewBag.Title = "SelectTourToCreateVoucher";
 }
 
-<h2>SelectTourToCreateVoucher</h2>
+<h2>Выбарть тур</h2>
 
 <p>
-    @Html.RouteLink("Back to Bouchers", new { controller = "Vouchers", action = "Index" })
+    @Html.RouteLink("Назад к путевкам", new { controller = "Vouchers", action = "Index" })
 </p>
 <table class="table">
     <tr>
@@ -71,7 +71,7 @@
             @Html.DisplayFor(modelItem => item.DayCount)
         </td>
         <td>
-            @Html.RouteLink("Select", new { controller = "Vouchers", action = "Create", idTour = item.ID })
+            @Html.RouteLink("Выбрать", new { controller = "Vouchers", action = "Create", idTour = item.ID })
         </td>
     </tr>
 }

@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
-using System.Data.Entity;
+﻿    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin;
+    using System.Data.Entity;
 
-namespace Lab1.Models
+namespace Lab1.Models.Security
 {
     public class MyIdentityUser : IdentityUser
     {
@@ -69,12 +69,13 @@ namespace Lab1.Models
             roleManager.Create(role2);
             roleManager.Create(role3);
 
-            var admin = new MyIdentityUser { 
-                Email = db.Employees.Where(e => e.Login == "admin" ).FirstOrDefault().Email, 
+            var admin = new MyIdentityUser
+            {
+                Email = db.Employees.Where(e => e.Login == "admin").FirstOrDefault().Email,
                 UserName = db.Employees.Where(e => e.Login == "admin").FirstOrDefault().Email
             };
 
-            
+
             string passwordManager = "admin";
 
             var resultManager = userManager.Create(admin, passwordManager);

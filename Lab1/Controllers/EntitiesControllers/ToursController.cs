@@ -49,16 +49,19 @@ namespace Lab1.Controllers.EntitiesControllers
         }
 
         // GET: Tours/Create
-        public ActionResult Create(int idHotel)
+        public ActionResult Create(int idHotel, int idTourOperator)
         {
             Hotel Hotel = db.Hotels.Find(idHotel);
             Hotel.Direction = db.Directions.Find(Hotel.DirectionId);
             ViewData["HotelName"] = Hotel.Name + ", " + Hotel.Direction.Name;
             ViewData["HotelId"] = Hotel.ID;
+            TourOperator oper = db.TourOperators.Find(idTourOperator);
+            ViewData["TourOperatorName"] = oper.Name;
+            ViewData["TourOperatorId"] = oper.ID;
+
 
             ViewBag.CategoryId = new SelectList(db.Categorys, "ID", "Name");
             ViewBag.KindId = new SelectList(db.Kinds, "ID", "Name");
-            ViewBag.TourOperatorId = new SelectList(db.TourOperators, "ID", "Name");
             return View();
         }
 

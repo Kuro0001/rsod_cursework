@@ -4,10 +4,10 @@
     ViewBag.Title = "SelectDirectionToSelectHotel";
 }
 
-<h2>SelectDirectionToSelectHotel</h2>
+<h2>Выбрать направление</h2>
 
 <p>
-    @Html.RouteLink("Back to list", new { controller = "Tour", action = "Index" })
+    @Html.RouteLink("Назад к списку", new { controller = "Tour", action = "Index" })
 </p>
 <table class="table">
     <tr>
@@ -24,7 +24,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.RouteLink("Select", new { controller = "Hotels", action = "SelectHotelToCreatTour", idDirection = item.ID })
+                @Html.RouteLink("Выбрать", new { controller = "Hotels", action = "SelectHotelToCreatTour", idDirection = item.ID })
             </td>
         </tr>
     }
