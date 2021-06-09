@@ -1,0 +1,155 @@
+﻿@model Lab1.Models.DetailModels.DetailClient
+@{
+    ViewBag.Title = "ClientDetail";
+}
+
+<h2>Информация о клиенте</h2>
+@Html.RouteLink("Сделать эксел-документ", new { controller = "EXEL", action = "GetExelClientInfo", ClietnId = ViewData["id"] })
+<div>
+    <h4>Клиент</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.Pasport)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Pasport)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.Patronymic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Patronymic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.BirthDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.BirthDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.Sex)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Sex)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.Login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Password)
+        </dd>
+
+    </dl>
+</div>
+
+<h4>
+
+    Путевки
+</h4>
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Клиент")
+        </th>
+        <th>
+            @Html.DisplayName("Сотрудник компании")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vouchers.First().Tour.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vouchers.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vouchers.First().Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vouchers.First().Price)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Vouchers)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.Surname)
+                @Html.DisplayFor(modelItem => item.Client.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.Surname)
+                @Html.DisplayFor(modelItem => item.Employee.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tour.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.RouteLink("Редактировать", new { controller = "Vouchers", action = "Edit", id = item.ID }) |
+                @Html.RouteLink("Подробности", new { controller = "Vouchers", action = "Details", id = item.ID }) |
+                @Html.RouteLink("Удалить", new { controller = "Vouchers", action = "Delete", id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+
