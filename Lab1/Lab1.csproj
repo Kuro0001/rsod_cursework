@@ -299,6 +299,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DetailControllers\DetailClientController.cs" />
+    <Compile Include="Controllers\DetailControllers\DetailEmployeeController.cs" />
     <Compile Include="Controllers\DetailControllers\EXELController.cs" />
     <Compile Include="Controllers\DetailControllers\PDFController.cs" />
     <Compile Include="Controllers\EntitiesControllers\CategoriesController.cs" />
@@ -346,6 +347,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DetailModels\DetailClient.cs" />
+    <Compile Include="Models\DetailModels\DetailEmployee.cs" />
     <Compile Include="Models\Entities\Category.cs" />
     <Compile Include="Models\Entities\Client.cs" />
     <Compile Include="Models\Security\ChangePassword.cs" />
@@ -459,6 +461,7 @@
     <Content Include="Views\ToSelectVoucher\SelectEmployee.cshtml" />
     <Content Include="Views\ToSelectVoucher\SelectClient.cshtml" />
     <Content Include="Views\DetailClient\ClientDetail.cshtml" />
+    <Content Include="Views\DetailEmployee\EmployeeDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,6 +7,7 @@
 <h2>Список сотрудников компании</h2>
 
 <p>
+    @Html.RouteLink("Посмотреть результат работы", new { controller = "DetailEmployee", action = "EmployeeDetail" }) |
     @Html.ActionLink("Создать нового", "Create")
 </p>
 <table class="table">

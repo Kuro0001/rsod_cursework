@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Lab1.Models.DetailModels.DetailEmployee>
+@{
+    ViewBag.Title = "EmployeesDetailInfo";
+}
+
+<h2>результат работы сотрудников</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Сотрудник компании")
+        </th>
+        <th>
+            @Html.DisplayName("Кол-во путевок")
+        </th>
+        <th>
+            @Html.DisplayName("Сумма")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.bio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.money)
+            </td>
+        </tr>
+    }
+
+</table>
