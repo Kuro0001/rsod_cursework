@@ -10,27 +10,39 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Lab1.Controllers
 {
     public class AccountController : Controller
     {
-        private UserManager<MyIdentityUser> userManager;
-        private RoleManager<MyIdentityRole> roleManager;
+        private readonly TouristAgencyDbEntities db = new TouristAgencyDbEntities();
 
-        public AccountController()
+        private MyUserManager UserManager
         {
-            MyIdentityDbContext db = new MyIdentityDbContext();
-            UserStore<MyIdentityUser> userStore = new UserStore<MyIdentityUser>(db);
-            userManager = new UserManager<MyIdentityUser>(userStore);
-            RoleStore<MyIdentityRole> roleStore = new RoleStore<MyIdentityRole>(db);
-            roleManager = new RoleManager<MyIdentityRole>(roleStore);
+            get
+            {
+                return HttpContext.GetOwinContext().GetUserManager<MyUserManager>();
+            }
         }
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+
+
+
 
         public ActionResult Register()
         {
             return View();
         }
+
+
+
 
         private void AccountValidationEdit(Register model)
         {
@@ -60,30 +72,31 @@ namespace Lab1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(Register model)
+        public async Task<ActionResult> Register(Register model)
         {
             AccountValidationEdit(model);
 
             if (ModelState.IsValid)
             {
-                MyIdentityUser user = new MyIdentityUser();
+                MyIdentityUser user = await UserManager.FindAsync(model.Email, model.Password);
 
-                user.UserName = model.UserName;
-                user.Email = model.Email;
-
-                IdentityResult result = userManager.Create(user, model.Password);
-
-                if (result.Succeeded)
+                if (user == null)
                 {
-                    userManager.AddToRole(user.Id, "Client");
-
-                    return RedirectToAction("Create", "Clients", new { model.Email });
+                    ModelState.AddModelError("", "Неверный логин или пароль.");
                 }
                 else
                 {
-                    ModelState.AddModelError("UserName", "Ошибка при создании пользователя!");
+                    ClaimsIdentity claim = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+                    AuthenticationManager.SignOut();
+                    AuthenticationManager.SignIn(new AuthenticationProperties
+                    {
+                        IsPersistent = true
+                    }, claim);
+
+                    return RedirectToAction("Index", "Home");
                 }
             }
+
             return View(model);
         }
 
@@ -101,44 +114,26 @@ namespace Lab1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(Login model, string returnUrl)
+        public async Task<ActionResult> Login(Login model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                MyIdentityUser user = userManager.Find(model.UserName, model.Password);
-                if (user != null)
+                MyIdentityUser user = await UserManager.FindAsync(model.UserName, model.Password);
+
+                if (user == null)
                 {
-                    IAuthenticationManager authenticationManager = HttpContext.GetOwinContext().Authentication;
-
-                    authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                    ClaimsIdentity identity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-
-                    AuthenticationProperties props = new AuthenticationProperties();
-                    props.IsPersistent = model.RememberMe;
-                    authenticationManager.SignIn(props, identity);
-
-                    if (Url.IsLocalUrl(returnUrl))
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        if (userManager.GetRoles(user.Id).Contains("Client"))
-                        {
-                            TouristAgencyDbEntities db = new TouristAgencyDbEntities();
-                            var client = db.Clients.Where(n => n.Email.Equals(user.Email)).First();
-
-                            return RedirectToAction("Details", "Clients", new { id = client.ID });
-                        }
-                        else if (userManager.GetRoles(user.Id).Contains("Employee") || userManager.GetRoles(user.Id).Contains("TourOperator"))
-                        {
-                            return RedirectToAction("Index", "Home");
-                        }
-                    }
+                    ModelState.AddModelError("", "Неверный логин или пароль.");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Неправильный логин или пароль");
+                    ClaimsIdentity claim = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+                    AuthenticationManager.SignOut();
+                    AuthenticationManager.SignIn(new AuthenticationProperties
+                    {
+                        IsPersistent = true
+                    }, claim);
+
+                    return RedirectToAction("Index", "Home");
                 }
             }
             return View(model);
@@ -157,23 +152,31 @@ namespace Lab1.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangePassword(ChangePassword model)
+        public async Task<ActionResult> ChangePassword(ChangePassword model)
         {
             if (ModelState.IsValid)
             {
-                MyIdentityUser user = userManager.FindByName(HttpContext.User.Identity.Name);
-                IdentityResult result = userManager.ChangePassword(user.Id, model.OldPassword, model.NewPassword);
+                MyIdentityUser user = await UserManager.FindByEmailAsync(model.Email);
 
-                if (result.Succeeded)
+                if (user != null)
                 {
-                    IAuthenticationManager authenticationManager =
-                   HttpContext.GetOwinContext().Authentication;
-                    authenticationManager.SignOut();
-                    return RedirectToAction("Login", "Account");
+                    IdentityResult result = await UserManager.ChangePasswordAsync(user.Id, model.OldPassword, model.NewPassword);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        foreach (string error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error);
+                        }
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError("", " Ошибка при смене пароля");
+                    ModelState.AddModelError(string.Empty, "Пользователь не найден");
                 }
             }
             return View(model);
@@ -187,10 +190,11 @@ namespace Lab1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOut()
         {
-            IAuthenticationManager authenticationManager =
-            HttpContext.GetOwinContext().Authentication;
+            IAuthenticationManager authenticationManager = HttpContext.GetOwinContext().Authentication;
+
             authenticationManager.SignOut();
-            return RedirectToAction("Login", "Account");
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

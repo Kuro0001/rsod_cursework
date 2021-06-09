@@ -1,0 +1,59 @@
+﻿@model Lab1.Models.ToSelectTour
+@{
+    ViewBag.Title = "SelectTourOperator";
+}
+
+<h2>Выберите туроператора для тура</h2>
+
+@Html.Hidden("HotelId", ViewData["HotelId"])
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TourOperator.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TourOperator.First().Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TourOperator.First().UniqCompanyNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TourOperator.First().Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TourOperator.First().Login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TourOperator.First().Password)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.TourOperator)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UniqCompanyNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.RouteLink("Выбрать", new { controller = "Tours", action = "Create", idHotel = ViewData["HotelId"], idTourOperator = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -16,35 +16,12 @@ namespace Lab1
     {
         protected void Application_Start()
         {
+            System.Data.Entity.Database.SetInitializer(new AppDbInitializer());
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            MyIdentityDbContext db = new MyIdentityDbContext();
-            RoleStore<MyIdentityRole> roleStore = new RoleStore<MyIdentityRole>(db);
-            RoleManager<MyIdentityRole> roleManager = new RoleManager<MyIdentityRole>(roleStore);
-
-            if (!roleManager.RoleExists("Employee"))
-            {
-                MyIdentityRole newRole = new MyIdentityRole("Employee",
-               "Администратор обладает полными правами в системе");
-                roleManager.Create(newRole);
-            }
-            if (!roleManager.RoleExists("TourOperator"))
-            {
-                MyIdentityRole newRole = new MyIdentityRole("TourOperator",
-                    "Туроператоры могут добавлять туры и отели");
-
-                roleManager.Create(newRole);
-            }
-            if (!roleManager.RoleExists("Client"))
-            {
-                MyIdentityRole newRole = new MyIdentityRole("Client",
-                    "Клиент может смотреть туры и свои путевки");
-
-                roleManager.Create(newRole);
-            }
         }
     }
 }

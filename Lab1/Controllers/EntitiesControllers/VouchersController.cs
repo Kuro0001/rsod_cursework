@@ -41,7 +41,7 @@ namespace Lab1.Controllers.EntitiesControllers
         }
 
         // GET: Vouchers/Create
-        public ActionResult Create(int idTour)
+        public ActionResult Create(int idTour, int idEmployee, int idClient)
         {
             Tour Tour = db.Tours.Find(idTour);
             Tour.Hotel = db.Hotels.Find(Tour.HotelId);
@@ -50,8 +50,15 @@ namespace Lab1.Controllers.EntitiesControllers
             ViewData["TourName"] = Tour.Name + ", " + Tour.Hotel.Direction.Name;
             ViewData["TourId"] = Tour.ID;
             ViewData["Price"] = (Tour.Price*Tour.DayCount)*Tour.Category.Discount + Tour.Category.AddedValue;
-            ViewBag.ClientId = new SelectList(db.Clients, "ID", "Pasport");
-            ViewBag.EmployeeId = new SelectList(db.Employees, "ID", "Name");
+
+            Client Client = db.Clients.Find(idClient);
+            ViewData["ClientName"] = Client.Surname + " " + Client.Name;
+            ViewData["ClientId"] = Client.ID;
+
+            Employee Employee = db.Employees.Find(idEmployee);
+            ViewData["EmployeeName"] = Employee.Surname + " " + Employee.Name;
+            ViewData["EmployeeId"] = Client.ID;
+
             return View();
         }
 
@@ -89,8 +96,7 @@ namespace Lab1.Controllers.EntitiesControllers
             }
             voucher.Tour = db.Tours.Find(voucher.TourId);
             voucher.Employee = db.Employees.Find(voucher.EmployeeId);
-
-            ViewBag.ClientId = new SelectList(db.Clients, "ID", "Pasport", voucher.ClientId);
+            voucher.Client = db.Clients.Find(voucher.ClientId);
             return View(voucher);
         }
 
@@ -107,9 +113,9 @@ namespace Lab1.Controllers.EntitiesControllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ClientId = new SelectList(db.Clients, "ID", "Pasport", voucher.ClientId);
-            ViewBag.EmployeeId = new SelectList(db.Employees, "ID", "Name", voucher.EmployeeId);
-            ViewBag.TourId = new SelectList(db.Tours, "ID", "Name", voucher.TourId);
+            voucher.Tour = db.Tours.Find(voucher.TourId);
+            voucher.Employee = db.Employees.Find(voucher.EmployeeId);
+            voucher.Client = db.Clients.Find(voucher.ClientId);
             return View(voucher);
         }
 

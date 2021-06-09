@@ -1,13 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Lab1.Models.Security
 {
     public class ChangePassword
     {
+        public string Id { get; set; }
+
+
+        [Required]
+        [DisplayName("Email")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+
         [Required]
         public string OldPassword { get; set; }
         [Required]
@@ -15,7 +21,10 @@ namespace Lab1.Models.Security
         public string NewPassword { get; set; }
 
 
-        [Compare("NewPassword", ErrorMessage = "Пароли не совпадают")]
+        [Required]
+        [Display(Name = "Повторите пароль")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ConfirmNewPassword { get; set; }
     }
 }

@@ -4,22 +4,22 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Подробности</h2>
 
 <div>
-    <h4>Voucher</h4>
+    <h4>Путевка</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Client.Pasport)
+            @Html.Display("Клиент")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Client.Pasport)
+            @Html.DisplayFor(model => model.Client.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Employee.Name)
+            @Html.Display("Сотрудник компании")
         </dt>
 
         <dd>
@@ -61,6 +61,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Назад к списку", "Index")
 </p>
