@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 using Lab1.Models;
 using Lab1.Models.Entities;
 
@@ -126,6 +127,35 @@ namespace Lab1.Controllers.EntitiesControllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult LoadFromAPI()
+        {
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("https://localhost:44356/client");
+            request.Accept = "application/xml";
+            WebResponse response = request.GetResponse();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(response.GetResponseStream());
+            XmlElement root = doc.DocumentElement;
+            foreach (XmlElement clientNode in root)
+            {
+                int id = Convert.ToInt32(clientNode["Id"].InnerText);
+                Client client = db.Clients.Find(id);
+                if (client == null)
+                {
+                    //Изменить ввод полей и проверить на уникальность айдишника
+                    Client newClient = new Client()
+                    {
+                        FIO = clientNode["FIO"].InnerText,
+                        Group = clientNode["Group"].InnerText,
+                        PhoneNo = clientNode["PhoneNo"].InnerText,
+                        Scholarship = Convert.ToDecimal(clientNode["Scholarship"].InnerText.Replace(".", ","))
+                    };
+                    db.Clients.Add(newClient);
+                }
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
