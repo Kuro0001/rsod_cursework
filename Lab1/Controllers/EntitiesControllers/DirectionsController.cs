@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 using Lab1.Models;
 using Lab1.Models.Entities;
 
@@ -134,6 +135,32 @@ namespace Lab1.Controllers.EntitiesControllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult LoadFromAPI()
+        {
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("https://localhost:5001/direction");
+            request.Accept = "application/xml";
+            WebResponse response = request.GetResponse();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(response.GetResponseStream());
+            XmlElement root = doc.DocumentElement;
+            foreach (XmlElement node in root)
+            {
+                int id = Convert.ToInt32(node["ID"].InnerText);
+                Direction direction = db.Directions.Find(id);
+                if (direction == null)
+                {
+                    //Изменить ввод полей и проверить на уникальность айдишника
+                    Direction newDirection = new Direction()
+                    {
+                        Name = node["Name"].InnerText
+                    };
+                    db.Directions.Add(newDirection);
+                }
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Lab1.Models;
 using Lab1.Models.Entities;
 using System.IO;
+using System.Xml;
 
 namespace Lab1.Controllers.EntitiesControllers
 {
@@ -148,6 +149,34 @@ namespace Lab1.Controllers.EntitiesControllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult LoadFromAPI()
+        {
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("https://localhost:5001/hotel");
+            request.Accept = "application/xml";
+            WebResponse response = request.GetResponse();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(response.GetResponseStream());
+            XmlElement root = doc.DocumentElement;
+            foreach (XmlElement node in root)
+            {
+                int id = Convert.ToInt32(node["ID"].InnerText);
+                Hotel hotel = db.Hotels.Find(id);
+                if (hotel == null)
+                {
+                    //Изменить ввод полей и проверить на уникальность айдишника
+                    Hotel note = new Hotel()
+                    {
+                        Name = node["Name"].InnerText,
+                        Address = node["Address"].InnerText,
+                        DirectionId = Convert.ToInt32(node["DirectionId"].InnerText)
+                    };
+                    db.Hotels.Add(note);
+                }
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
